@@ -1,0 +1,12 @@
+atlassian-jira:
+  ajp_port: 8009
+  http_port: 8080
+  crowdSSO: True
+  crowd:
+    application.name: Example Jira
+    application.password: SecretPassword
+    crowd.base.url: http://crowd.example.com/crowd/
+  managedb: False
+  db:
+    username: jira-db-user
+    password: jira-db-password

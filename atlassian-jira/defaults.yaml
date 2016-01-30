@@ -1,0 +1,20 @@
+atlassian-jira:
+  version: 7.0.5
+  dir: /opt/atlassian/jira
+  ajp_port: 8009
+  user: jira
+  group: jira
+  crowdSSO: False
+  crowd:
+    session.isauthenticated: session.isauthenticated
+    session.tokenkey: session.tokenkey
+    session.validationinterval: 2
+    session.lastvalidation: session.lastvalidation
+  catalina_opts: -Xms1536m -Xmx1536m
+  managedb: True
+  db:
+    type: postgres72
+    schema: public
+    url: jdbc:postgresql://localhost:5432/jira
+    username: jira
+    password: jira-password

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jira-database-config>
+  <name>defaultDS</name>
+  <delegator-name>default</delegator-name>
+  <database-type>{{ config.db.type }}</database-type>
+  <schema-name>{{ config.db.schema }}</schema-name>
+  <jdbc-datasource>
+    <url>{{ config.db.url }}</url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <username>{{ config.db.username }}</username>
+    <password>{{ config.db.password }}</password>
+  </jdbc-datasource>
+</jira-database-config>
