@@ -2,8 +2,8 @@
 atlassian-jira-formula
 ============================
 
-.. image:: https://travis-ci.org/corux/atlassian-jira-formula.svg?branch=master
-    :target: https://travis-ci.org/corux/atlassian-jira-formula
+.. image:: https://travis-ci.org/XITASO/atlassian-jira-formula.svg?branch=master
+    :target: https://travis-ci.org/XITASO/atlassian-jira-formula
 
 Installs Atlassian JIRA Software.
 
