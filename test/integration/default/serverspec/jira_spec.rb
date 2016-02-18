@@ -16,5 +16,5 @@ describe port("8080") do
 end
 
 describe command('curl -L localhost:8080') do
-  its(:stdout) { should contain('JIRA setup') }
+  its(:stdout) { should contain('JIRA') }
 end
