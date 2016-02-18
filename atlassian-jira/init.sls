@@ -124,7 +124,7 @@ jira-script-{{ file }}:
       - service: jira
 {% endfor %}
 
-{% if 'crowd' in jira and jira.crowd %}
+{% if jira.get('crowd') %}
 jira-crowd-properties:
   file.managed:
     - name: {{ jira.dirs.install }}/atlassian-jira/WEB-INF/classes/crowd.properties
@@ -133,9 +133,9 @@ jira-crowd-properties:
     - watch_in:
       - service: jira
     - contents: |
-{% for key, val in jira.get('crowd', {}).iteritems() %}
+{%- for key, val in jira.crowd.items() %}
         {{ key }}: {{ val }}
-{% endfor %}
+{%- endfor %}
 {% endif %}
 
 {% if jira.managedb %}
