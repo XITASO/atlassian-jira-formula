@@ -1,5 +1,5 @@
 atlassian-jira:
-  version: 7.1.1
+  version: 7.1.2
   dir: /opt/atlassian/jira
   ajp_port: 8009
   user: jira
