@@ -1,7 +1,6 @@
 atlassian-jira:
   version: 7.3.2
   dir: /opt/atlassian/jira
-  ajp_port: 8009
   user: jira
   group: jira
   crowdSSO: false

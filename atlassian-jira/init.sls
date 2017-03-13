@@ -3,6 +3,11 @@
 include:
   - java
 
+jira-dependencies:
+  pkg.installed:
+    - pkgs:
+      - libxslt
+
 jira:
   file.managed:
     - name: /etc/systemd/system/atlassian-jira.service
@@ -59,15 +64,26 @@ jira-install:
     - watch_in:
       - service: jira
 
-jira-serverxml:
+jira-server-xsl:
   file.managed:
-    - name: {{ jira.dirs.install }}/conf/server.xml
-    - source: salt://atlassian-jira/files/server.xml
+    - name: /tmp/jira-server.xsl
+    - source: salt://atlassian-jira/files/server.xsl
     - template: jinja
-    - defaults:
-        config: {{ jira }}
     - require:
       - file: jira-install
+
+  cmd.run:
+    - name: 'xsltproc --stringparam pHttpPort "{{ jira.get('http_port', '') }}" --stringparam pHttpScheme "{{ jira.get('http_scheme', '') }}" --stringparam pHttpProxyName "{{ jira.get('http_proxyName', '') }}" --stringparam pHttpProxyPort "{{ jira.get('http_proxyPort', '') }}" --stringparam pAjpPort "{{ jira.get('ajp_port', '') }}" -o /tmp/jira-server.xml /tmp/jira-server.xsl server.xml'
+    - cwd: {{ jira.dirs.install }}/conf
+    - require:
+      - file: jira-server-xsl
+
+jira-server-xml:
+  file.managed:
+    - name: {{ jira.dirs.install }}/conf/server.xml
+    - source: /tmp/jira-server.xml
+    - require:
+      - cmd: jira-server-xsl
     - watch_in:
       - service: jira
 
