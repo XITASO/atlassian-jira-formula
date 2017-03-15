@@ -51,6 +51,7 @@ jira-install:
     - name: {{ jira.dirs.extract }}
     - source: {{ jira.url }}
     - source_hash: {{ jira.url_hash }}
+    - options: z
     - if_missing: {{ jira.dirs.current_install }}
     - keep: True
     - require:
