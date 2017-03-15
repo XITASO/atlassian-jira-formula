@@ -66,14 +66,15 @@ jira-install:
 
 jira-server-xsl:
   file.managed:
-    - name: /tmp/jira-server.xsl
+    - name: {{ jira.dirs.temp }}/server.xsl
     - source: salt://atlassian-jira/files/server.xsl
     - template: jinja
     - require:
       - file: jira-install
+      - file: jira-temptdir
 
   cmd.run:
-    - name: 'xsltproc --stringparam pHttpPort "{{ jira.get('http_port', '') }}" --stringparam pHttpScheme "{{ jira.get('http_scheme', '') }}" --stringparam pHttpProxyName "{{ jira.get('http_proxyName', '') }}" --stringparam pHttpProxyPort "{{ jira.get('http_proxyPort', '') }}" --stringparam pAjpPort "{{ jira.get('ajp_port', '') }}" -o /tmp/jira-server.xml /tmp/jira-server.xsl server.xml'
+    - name: 'xsltproc --stringparam pHttpPort "{{ jira.get('http_port', '') }}" --stringparam pHttpScheme "{{ jira.get('http_scheme', '') }}" --stringparam pHttpProxyName "{{ jira.get('http_proxyName', '') }}" --stringparam pHttpProxyPort "{{ jira.get('http_proxyPort', '') }}" --stringparam pAjpPort "{{ jira.get('ajp_port', '') }}" -o {{ jira.dirs.temp }}/server.xml {{ jira.dirs.temp }}/server.xsl server.xml'
     - cwd: {{ jira.dirs.install }}/conf
     - require:
       - file: jira-server-xsl
@@ -81,7 +82,7 @@ jira-server-xsl:
 jira-server-xml:
   file.managed:
     - name: {{ jira.dirs.install }}/conf/server.xml
-    - source: /tmp/jira-server.xml
+    - source: {{ jira.dirs.temp }}/server.xml
     - require:
       - cmd: jira-server-xsl
     - watch_in:
@@ -108,6 +109,12 @@ jira-home:
 jira-extractdir:
   file.directory:
     - name: {{ jira.dirs.extract }}
+    - use:
+      - file: jira-dir
+
+jira-temptdir:
+  file.directory:
+    - name: {{ jira.dirs.temp }}
     - use:
       - file: jira-dir
 
