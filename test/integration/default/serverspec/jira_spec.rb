@@ -11,10 +11,14 @@ describe port("8009") do
   it { should be_listening }
 end
 
+describe command("sleep 10s") do
+  its(:exit_status) { should eq 0 }
+end
+
 describe port("8080") do
   it { should be_listening }
 end
 
-describe command('curl -L localhost:8080') do
-  its(:stdout) { should contain('JIRA') }
+describe command("curl -L localhost:8080") do
+  its(:stdout) { should contain("JIRA") }
 end
