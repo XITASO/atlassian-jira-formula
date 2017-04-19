@@ -1,5 +1,5 @@
 atlassian-jira:
-  version: 7.3.4
+  version: 7.3.5
   dir: /opt/atlassian/jira
   user: jira
   group: jira
