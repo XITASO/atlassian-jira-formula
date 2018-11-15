@@ -4,6 +4,7 @@
   <xsl:param name="pHttpProxyName" />
   <xsl:param name="pHttpProxyPort" />
   <xsl:param name="pAjpPort" />
+  <xsl:param name="pAccessLogFormat" />
 
   <!-- Identity transform -->
   <xsl:template match="@* | node()">
@@ -98,5 +99,18 @@
         <xsl:apply-templates select="node()"/>
       </xsl:copy>
     </xsl:if>
+  </xsl:template>
+
+  <!-- Change access log format -->
+  <xsl:template match="Valve[@className='org.apache.catalina.valves.AccessLogValve']">
+    <xsl:copy>
+      <xsl:apply-templates select="@*"/>
+        <xsl:if test="$pAccessLogFormat">
+          <xsl:attribute name="pattern">
+            <xsl:value-of select="$pAccessLogFormat"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:apply-templates select="node()"/>
+      </xsl:copy>
   </xsl:template>
 </xsl:stylesheet>

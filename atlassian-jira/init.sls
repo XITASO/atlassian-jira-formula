@@ -75,7 +75,14 @@ jira-server-xsl:
       - file: jira-temptdir
 
   cmd.run:
-    - name: 'xsltproc --stringparam pHttpPort "{{ jira.get('http_port', '') }}" --stringparam pHttpScheme "{{ jira.get('http_scheme', '') }}" --stringparam pHttpProxyName "{{ jira.get('http_proxyName', '') }}" --stringparam pHttpProxyPort "{{ jira.get('http_proxyPort', '') }}" --stringparam pAjpPort "{{ jira.get('ajp_port', '') }}" -o {{ jira.dirs.temp }}/server.xml {{ jira.dirs.temp }}/server.xsl server.xml'
+    - name: |
+        xsltproc --stringparam pHttpPort "{{ jira.get('http_port', '') }}" \
+          --stringparam pHttpScheme "{{ jira.get('http_scheme', '') }}" \
+          --stringparam pHttpProxyName "{{ jira.get('http_proxyName', '') }}" \
+          --stringparam pHttpProxyPort "{{ jira.get('http_proxyPort', '') }}" \
+          --stringparam pAjpPort "{{ jira.get('ajp_port', '') }}" \
+          --stringparam pAccessLogFormat "{{ jira.get('access_log_format', '').replace('"', '\\"') }}" \
+          -o {{ jira.dirs.temp }}/server.xml {{ jira.dirs.temp }}/server.xsl server.xml
     - cwd: {{ jira.dirs.install }}/conf
     - require:
       - file: jira-server-xsl
