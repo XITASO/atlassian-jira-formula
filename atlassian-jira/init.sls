@@ -196,7 +196,7 @@ jira-disable-JiraSeraphAuthenticator:
   file.blockreplace:
     - name: {{ jira.dirs.install }}/atlassian-jira/WEB-INF/classes/seraph-config.xml
     - marker_start: 'CROWD:START - The authenticator below here will need to be commented'
-    - marker_end: 'CROWD:END'
+    - marker_end: '<!-- CROWD:END'
     - content: {% if jira.crowdSSO %}'    <!-- <authenticator class="com.atlassian.jira.security.login.JiraSeraphAuthenticator"/> -->'{% else %}'    <authenticator class="com.atlassian.jira.security.login.JiraSeraphAuthenticator"/>'{% endif %}
     - require:
       - file: jira-install
@@ -207,7 +207,7 @@ jira-enable-SSOSeraphAuthenticator:
   file.blockreplace:
     - name: {{ jira.dirs.install }}/atlassian-jira/WEB-INF/classes/seraph-config.xml
     - marker_start: 'CROWD:START - If enabling Crowd SSO integration uncomment'
-    - marker_end: 'CROWD:END'
+    - marker_end: '<!-- CROWD:END'
     - content: {% if jira.crowdSSO %}'    <authenticator class="com.atlassian.jira.security.login.SSOSeraphAuthenticator"/>'{% else %}'    <!-- <authenticator class="com.atlassian.jira.security.login.SSOSeraphAuthenticator"/> -->'{% endif %}
     - require:
       - file: jira-install
