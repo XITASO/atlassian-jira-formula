@@ -14,7 +14,7 @@ jira:
     - source: salt://atlassian-jira/files/atlassian-jira.service
     - template: jinja
     - defaults:
-        config: {{ jira }}
+        config: {{ jira|json }}
 
   module.wait:
     - name: service.systemctl_reload
@@ -142,7 +142,7 @@ jira-script-{{ file }}:
     - mode: 755
     - template: jinja
     - defaults:
-        config: {{ jira }}
+        config: {{ jira|json }}
     - require:
       - file: jira-scriptdir
       - group: jira
@@ -175,7 +175,7 @@ jira-dbconfig:
     - group: {{ jira.group }}
     - mode: 640
     - defaults:
-        config: {{ jira }}
+        config: {{ jira|json }}
     - require:
       - file: jira-home
     - watch_in:
@@ -220,3 +220,4 @@ jira-enable-SSOSeraphAuthenticator:
       - file: jira-install
     - watch_in:
       - service: jira
+
