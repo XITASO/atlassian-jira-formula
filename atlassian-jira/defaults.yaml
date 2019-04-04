@@ -1,19 +1,19 @@
 atlassian-jira:
-  version: 8.0.2
-  dir: /opt/atlassian/jira
-  user: jira
-  group: jira
-  crowdSSO: false
+  catalina_opts: -Xms1536m -Xmx1536m
   crowd:
     session.isauthenticated: session.isauthenticated
+    session.lastvalidation: session.lastvalidation
     session.tokenkey: session.tokenkey
     session.validationinterval: 2
-    session.lastvalidation: session.lastvalidation
-  catalina_opts: -Xms1536m -Xmx1536m
-  managedb: true
+  crowdSSO: false
   db:
-    type: postgres72
+    password: jira-password
     schema: public
+    type: postgres72
     url: jdbc:postgresql://localhost:5432/jira
     username: jira
-    password: jira-password
+  dir: /opt/atlassian/jira
+  group: jira
+  managedb: true
+  user: jira
+  version: 8.1.0
