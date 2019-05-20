@@ -16,4 +16,4 @@ atlassian-jira:
   group: jira
   managedb: true
   user: jira
-  version: 8.1.1
+  version: 8.2.0
