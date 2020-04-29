@@ -71,7 +71,6 @@ jira-server-xsl:
     - source: salt://atlassian-jira/files/server.xsl
     - template: jinja
     - require:
-      - file: jira-install
       - file: jira-temptdir
 
   cmd.run:
@@ -85,6 +84,7 @@ jira-server-xsl:
           -o {{ jira.dirs.temp }}/server.xml {{ jira.dirs.temp }}/server.xsl server.xml
     - cwd: {{ jira.dirs.install }}/conf
     - require:
+      - file: jira-install
       - file: jira-server-xsl
 
 jira-server-xml:
