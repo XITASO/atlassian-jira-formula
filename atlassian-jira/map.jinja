@@ -6,7 +6,7 @@
   'url': jira.get('url', 'https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-' + jira.version + '.tar.gz'),
   'url_hash': jira.get('url_hash', 'https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-' + jira.version + '.tar.gz.md5'),
   'pid': jira.dir + '/home/jira.pid',
-  'java_home': java.jre8.home,
+  'java_home': java[java.env].home,
   'dirs': {
     'scripts': jira.dir + '/scripts',
     'home': jira.dir + '/home',
