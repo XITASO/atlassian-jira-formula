@@ -10,6 +10,7 @@
     <driver-class>org.postgresql.Driver</driver-class>
     <username>{{ config.db.username }}</username>
     <password>{{ config.db.password }}</password>
+    <connection-properties>tcpKeepAlive=true;socketTimeout=240</connection-properties>
 
     <pool-min-size>20</pool-min-size>
     <pool-max-size>20</pool-max-size>
